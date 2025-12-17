@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Excalidraw Board
 
-## Getting Started
+A minimalist, dark-themed board app built with Next.js and Tailwind CSS. Create multiple boards and lightweight "boxes" for notes, edit full‑screen with Split / Edit / Preview modes, search & highlight, and persist data in the browser (localStorage). Import/export boards as JSON for backups.
 
-First, run the development server:
+## Features
+- Multiple boards with named boxes
+- Fullscreen editor with Split / Edit / Preview modes
+- In-modal search & highlight
+- Autosave to `localStorage`
+- Import / Export boards as JSON
+- Dark (black) primary theme with white/gray accents
+
+## Quickstart
+1. Install dependencies
+
+```bash
+npm install
+```
+
+2. Run the dev server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open http://localhost:3000
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Files of interest
+- `app/page.js` — landing page
+- `app/board/page.js` — main board UI and editor
+- `app/globals.css` — color variables and global styles
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
+- Create a new board from the sidebar.
+- Add boxes to a board; click a box to open the fullscreen editor.
+- Use the header search in fullscreen to find text inside the box (matches are highlighted).
+- Export to JSON for backups; import JSON to restore.
 
-## Learn More
+## Suggested GitHub settings
+- Repository description: "Excalidraw Board — a minimal dark Next.js board with fullscreen editor and autosave"
+- Topics/tags: `nextjs`, `tailwindcss`, `notes`, `productivity`, `dark-theme`
+- Recommended license: MIT
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
+PRs welcome. For UI tweaks, run the dev server locally and open the app. Keep changes minimal and follow the existing style.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## License
+MIT — add a `LICENSE` file if you want to publish this repository publicly.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+If you'd like, I can now:
+- add a `LICENSE` (MIT) file,
+- create a `.gitignore` tailored for Next.js, or
+- prepare a short GitHub repository description and topics you can paste into the repo settings.
+Tell me which and I'll add them.
