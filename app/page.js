@@ -1,186 +1,119 @@
+
+
+
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const [boards, setBoards] = useState([
-    {
-      id: 1,
-      title: 'board1',
-      heading: 'Heading of this boards (board1)',
-      boxes: [
-        {
-          id: 1,
-          title: 'title of box',
-          content: ['List', 'media', 'text etc']
-        },
-        {
-          id: 2,
-          title: 'title of box',
-          content: ['List', 'media', 'text etc']
-        },
-        {
-          id: 3,
-          title: 'title of box',
-          content: ['List', 'media', 'text etc']
-        }
-      ]
-    }
-  ]);
-
-  const [selectedBoard, setSelectedBoard] = useState(0);
-
-  const addBoard = () => {
-    const newBoard = {
-      id: boards.length + 1,
-      title: `board${boards.length + 1}`,
-      heading: `Heading of this boards (board${boards.length + 1})`,
-      boxes: []
-    };
-    setBoards([...boards, newBoard]);
-  };
-
-  const addBox = () => {
-    const updatedBoards = [...boards];
-    const newBox = {
-      id: updatedBoards[selectedBoard].boxes.length + 1,
-      title: 'title of box',
-      content: ['List', 'media', 'text etc']
-    };
-    updatedBoards[selectedBoard].boxes.push(newBox);
-    setBoards(updatedBoards);
-  };
-
-  const updateBoardHeading = (value) => {
-    const updatedBoards = [...boards];
-    updatedBoards[selectedBoard].heading = value;
-    setBoards(updatedBoards);
-  };
-
-  const updateBoxTitle = (boxIndex, value) => {
-    const updatedBoards = [...boards];
-    updatedBoards[selectedBoard].boxes[boxIndex].title = value;
-    setBoards(updatedBoards);
-  };
-
-  const updateBoxContent = (boxIndex, contentIndex, value) => {
-    const updatedBoards = [...boards];
-    updatedBoards[selectedBoard].boxes[boxIndex].content[contentIndex] = value;
-    setBoards(updatedBoards);
-  };
-
-  const addContentLine = (boxIndex) => {
-    const updatedBoards = [...boards];
-    updatedBoards[selectedBoard].boxes[boxIndex].content.push('new item');
-    setBoards(updatedBoards);
-  };
-
-  const deleteBox = (boxIndex) => {
-    const updatedBoards = [...boards];
-    updatedBoards[selectedBoard].boxes.splice(boxIndex, 1);
-    setBoards(updatedBoards);
-  };
+  const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-black text-white p-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex gap-8">
-          {/* Sidebar */}
-          <div className="w-64 border-2 border-white rounded-3xl p-6 h-fit">
-            <h2 className="text-2xl mb-6 font-light">List of Content</h2>
-            <div className="space-y-2">
-              {boards.map((board, index) => (
-                <button
-                  key={board.id}
-                  onClick={() => setSelectedBoard(index)}
-                  className={`w-full text-left px-4 py-2 rounded-lg transition-colors ${selectedBoard === index
-                    ? 'bg-white text-black'
-                    : 'hover:bg-gray-800'
-                    }`}
-                >
-                  {index + 1}. {board.title}
-                </button>
-              ))}
-              <button
-                onClick={addBoard}
-                className="w-full text-left px-4 py-2 text-gray-400 hover:text-white transition-colors"
-              >
-                + Add Board
-              </button>
-            </div>
+    <div className="min-h-screen bg-black text-white">
+      {/* Hero Section */}
+      <div className="container mx-auto px-4 py-20">
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-linear-to-r from-white via-gray-300 to-gray-500 bg-clip-text text-transparent">
+            Excalidraw Board
+          </h1>
+          <p className="text-xl md:text-2xl text-gray-400 mb-12 font-light">
+            Your minimalist workspace for organizing thoughts, ideas, and notes
+          </p>
+          <button
+            onClick={() => router.push('/board')}
+            className="group relative inline-flex items-center gap-3 px-8 py-4 text-lg font-medium border-2 border-white rounded-xl hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105"
+          >
+            Get Started
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
+          </button>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid md:grid-cols-3 gap-8 mt-32 max-w-6xl mx-auto">
+          <div className="border-2 border-white rounded-3xl p-8 bg-gray-900 hover:bg-gray-800 transition-colors">
+            <div className="text-4xl mb-4">📝</div>
+            <h3 className="text-2xl font-semibold mb-3">Simple & Clean</h3>
+            <p className="text-gray-400">
+              A distraction-free interface that lets you focus on what matters most - your ideas.
+            </p>
           </div>
 
-          {/* Main Content */}
-          <div className="flex-1 border-2 border-white rounded-3xl p-8">
-            {/* Header */}
-            <div className="flex items-center gap-4 mb-8">
-              <input
-                type="text"
-                value={boards[selectedBoard].heading}
-                onChange={(e) => updateBoardHeading(e.target.value)}
-                className="flex-1 bg-transparent border-2 border-white rounded-xl px-6 py-3 text-xl focus:outline-none focus:ring-2 focus:ring-white"
-              />
-              <button
-                onClick={addBox}
-                className="border-2 border-white rounded-xl px-6 py-3 hover:bg-white hover:text-black transition-colors whitespace-nowrap"
-              >
-                add Box
-              </button>
-            </div>
+          <div className="border-2 border-white rounded-3xl p-8 bg-gray-900 hover:bg-gray-800 transition-colors">
+            <div className="text-4xl mb-4">💾</div>
+            <h3 className="text-2xl font-semibold mb-3">Auto-Save</h3>
+            <p className="text-gray-400">
+              Everything is automatically saved to your browser. Never lose your work again.
+            </p>
+          </div>
 
-            {/* Boxes Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {boards[selectedBoard].boxes.map((box, boxIndex) => (
-                <div
-                  key={box.id}
-                  className="border-2 border-white rounded-3xl p-6 relative group"
-                >
-                  <button
-                    onClick={() => deleteBox(boxIndex)}
-                    className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity text-red-400 hover:text-red-300"
-                  >
-                    ✕
-                  </button>
-                  <input
-                    type="text"
-                    value={box.title}
-                    onChange={(e) => updateBoxTitle(boxIndex, e.target.value)}
-                    className="w-full bg-transparent border-2 border-white rounded-xl px-4 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-white"
-                  />
-                  <div className="space-y-2">
-                    <div className="text-sm font-light mb-2">content</div>
-                    {box.content.map((item, contentIndex) => (
-                      <div key={contentIndex} className="flex items-center gap-2">
-                        <span className="text-gray-400">•</span>
-                        <input
-                          type="text"
-                          value={item}
-                          onChange={(e) =>
-                            updateBoxContent(boxIndex, contentIndex, e.target.value)
-                          }
-                          className="flex-1 bg-transparent border-none focus:outline-none focus:ring-1 focus:ring-gray-600 rounded px-2 py-1"
-                        />
-                      </div>
-                    ))}
-                    <button
-                      onClick={() => addContentLine(boxIndex)}
-                      className="text-gray-400 hover:text-white text-sm mt-2"
-                    >
-                      + Add item
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {boards[selectedBoard].boxes.length === 0 && (
-              <div className="text-center text-gray-500 py-20">
-                No boxes yet. Click "add Box" to create one.
-              </div>
-            )}
+          <div className="border-2 border-white rounded-3xl p-8 bg-gray-900 hover:bg-gray-800 transition-colors">
+            <div className="text-4xl mb-4">🎯</div>
+            <h3 className="text-2xl font-semibold mb-3">Organize</h3>
+            <p className="text-gray-400">
+              Create multiple boards and boxes to keep your notes perfectly organized.
+            </p>
           </div>
         </div>
+
+        {/* Preview Section */}
+        <div className="mt-32 max-w-6xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-12">How It Works</h2>
+          <div className="border-2 border-white rounded-3xl p-12 bg-gray-900">
+            <div className="space-y-8">
+              <div className="flex items-start gap-6">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-white text-black flex items-center justify-center font-bold text-xl">
+                  1
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold mb-2">Create Boards</h4>
+                  <p className="text-gray-400">Organize your work into different boards for projects, ideas, or topics.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-white text-black flex items-center justify-center font-bold text-xl">
+                  2
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold mb-2">Add Boxes</h4>
+                  <p className="text-gray-400">Create boxes within each board to break down your thoughts into manageable pieces.</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-6">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-white text-black flex items-center justify-center font-bold text-xl">
+                  3
+                </div>
+                <div>
+                  <h4 className="text-xl font-semibold mb-2">Write & Edit</h4>
+                  <p className="text-gray-400">Click any box to open it full-screen and write as much as you need.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-32 text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to get organized?</h2>
+          <p className="text-xl text-gray-400 mb-8">Start creating your boards now. No signup required.</p>
+          <button
+            onClick={() => router.push('/board')}
+            className="inline-flex items-center gap-3 px-10 py-5 text-xl font-medium bg-white text-black rounded-xl hover:bg-gray-200 transition-all duration-300 transform hover:scale-105"
+          >
+            Launch App
+            <span>🚀</span>
+          </button>
+        </div>
       </div>
+
+      {/* Footer */}
+      <footer className="border-t border-gray-800 mt-32 py-8">
+        <div className="container mx-auto px-4 text-center text-gray-500">
+          <p>Built with Next.js & Tailwind CSS</p>
+        </div>
+      </footer>
     </div>
   );
 }
